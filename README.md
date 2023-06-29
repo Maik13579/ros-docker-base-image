@@ -79,7 +79,7 @@ ros2(){
     bash -c \
         "echo 'source /opt/ros/humble/setup.bash' >> /root/.bashrc &&\
         cd ${CURRENT_DIR}
-        bash\"
+        bash"
 }
 
 rviz(){
@@ -92,6 +92,7 @@ rviz(){
     -e ROS_MASTER_URI \
     -e ROS_IP \
     -e ROS_HOSTNAME \
+    -v $HOME/.config/rviz:/opt/ros/noetic/share/rviz/config \
     ros-base-image:noetic \
     rviz
 }
@@ -108,6 +109,7 @@ rviz2(){
     -v /dev/shm:/dev/shm \
     -e DISPLAY \
     -e ROS_DOMAIN_ID \
+    -v $HOME/.config/rviz2:/root/.rviz2 \
     ros-base-image:humble \
     rviz2
 }
