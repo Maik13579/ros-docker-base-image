@@ -1,0 +1,18 @@
+version: '2.4'
+services:
+  ros:
+    container_name: ros-base-image_build
+    image: ros-base-image:noetic
+    build:
+      context: ..
+      dockerfile: docker/ros/Dockerfile
+      args:
+        ROS_DISTRO: noetic
+  ros2:
+    container_name: ros-base-image_ros2_build
+    image: ros-base-image:humble
+    build:
+      context: ..
+      dockerfile: docker/ros2/Dockerfile
+      args:
+        ROS_DISTRO: humble
