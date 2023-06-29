@@ -34,6 +34,7 @@ export ROS_DOMAIN_ID=11
 ros(){
 	CURRENT_DIR=$(pwd)
     docker run --rm -it \
+    --privileged \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY \
     -e ROS_MASTER_URI\
@@ -51,11 +52,13 @@ ros(){
 
 roscore(){
     docker run --rm -it \
+    --privileged \
     --name roscore \
     --net=host \
     -e ROS_MASTER_URI\
     -e ROS_IP\
     -e ROS_HOSTNAME\
+    -e WAIT_FOR_ROSCORE=0\
     ros-base-image:noetic \
     roscore
 }
@@ -67,6 +70,7 @@ ros2(){
 	fi
 
     docker run --rm -it \
+    --privileged \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /dev/shm:/dev/shm \
     -e DISPLAY \
@@ -83,6 +87,7 @@ ros2(){
 
 rviz(){
     docker run --rm -it \
+    --privileged \
 	--name rviz \
  	--net=host \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -99,6 +104,7 @@ rviz2(){
 		export ROS_DOMAIN_ID=$1
 	fi
     docker run --rm -it \
+    --privileged \
 	--name rviz2 \
  	--net=host \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -108,5 +114,4 @@ rviz2(){
     ros-base-image:humble \
     rviz2
 }
-
 ```
