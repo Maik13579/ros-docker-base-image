@@ -13,11 +13,6 @@ SHELL ["/bin/bash", "-c"]
 COPY docker/ros/ros_entrypoint.sh /ros_entrypoint.sh
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
-#ssh key
-#COPY .ssh /root/.ssh
-#RUN chmod 600 /root/.ssh/id_rsa && \
-#    echo -e 'Host fbe-gitlab.hs-weingarten.de\n\tStrictHostKeyChecking no\n' >> /root/.ssh/config
-
 #update packages
 RUN apt update \
  && apt upgrade -y \
