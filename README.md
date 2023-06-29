@@ -32,7 +32,7 @@ export ROS_MASTER_URI=http://127.0.0.1:11311
 export ROS_DOMAIN_ID=11
 
 ros(){
-	CURRENT_DIR=$(pwd)
+    CURRENT_DIR=$(pwd)
     docker run --rm -it \
     --privileged \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -46,8 +46,7 @@ ros(){
     bash -c \
         "echo 'source /opt/ros/noetic/setup.bash' >> /root/.bashrc &&\
         cd ${CURRENT_DIR}
-        bash\
-        "
+        bash"
 }
 
 roscore(){
@@ -64,11 +63,10 @@ roscore(){
 }
 
 ros2(){
-	CURRENT_DIR=$(pwd)
-	if [ -n "$1" ]; then
-		export ROS_DOMAIN_ID=$1
-	fi
-
+    CURRENT_DIR=$(pwd)
+    if [ -n "$1" ]; then
+        export ROS_DOMAIN_ID=$1
+    fi
     docker run --rm -it \
     --privileged \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
@@ -81,17 +79,16 @@ ros2(){
     bash -c \
         "echo 'source /opt/ros/humble/setup.bash' >> /root/.bashrc &&\
         cd ${CURRENT_DIR}
-        bash\
-        "
+        bash\"
 }
 
 rviz(){
     docker run --rm -it \
     --privileged \
-	--name rviz \
- 	--net=host \
-	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-e DISPLAY \
+    --name rviz \
+    --net=host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY \
     -e ROS_MASTER_URI \
     -e ROS_IP \
     -e ROS_HOSTNAME \
@@ -100,17 +97,17 @@ rviz(){
 }
 
 rviz2(){
-	if [ -n "$1" ]; then
-		export ROS_DOMAIN_ID=$1
-	fi
+    if [ -n "$1" ]; then
+        export ROS_DOMAIN_ID=$1
+    fi
     docker run --rm -it \
     --privileged \
-	--name rviz2 \
- 	--net=host \
-	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-v /dev/shm:/dev/shm \
-	-e DISPLAY \
-	-e ROS_DOMAIN_ID \
+    --name rviz2 \
+    --net=host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /dev/shm:/dev/shm \
+    -e DISPLAY \
+    -e ROS_DOMAIN_ID \
     ros-base-image:humble \
     rviz2
 }
