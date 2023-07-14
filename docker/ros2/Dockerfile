@@ -31,6 +31,7 @@ RUN apt update \
     ros-$ROS_DISTRO-rqt-common-plugins \
     ros-$ROS_DISTRO-rmw-cyclonedds-cpp \
     ros-$ROS_DISTRO-rviz2 \
+    ros-$ROS_DISTRO-tf-transformations \
     lsb-release \
     wget \
     curl \
@@ -41,6 +42,7 @@ RUN apt update \
     python3-colcon-common-extensions \
     python3-rosdep \
     python3-pip \
+ && pip3 install transforms3d \
  && rm -rf /var/lib/apt/lists/*
 
 #create workspace
